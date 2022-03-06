@@ -205,7 +205,7 @@
             this.cmdPreview.Name = "cmdPreview";
             this.cmdPreview.Size = new System.Drawing.Size(75, 23);
             this.cmdPreview.TabIndex = 10;
-            this.cmdPreview.Text = "Preview";
+            this.cmdPreview.Text = "Compute";
             this.cmdPreview.UseVisualStyleBackColor = true;
             this.cmdPreview.Click += new System.EventHandler(this.cmdPreview_Click);
             // 
