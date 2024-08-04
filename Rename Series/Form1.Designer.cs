@@ -50,6 +50,8 @@
             this.txtMatch2 = new System.Windows.Forms.TextBox();
             this.txtReplace3 = new System.Windows.Forms.TextBox();
             this.txtMatch3 = new System.Windows.Forms.TextBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.chkCleanSE = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -272,11 +274,35 @@
             this.txtMatch3.Size = new System.Drawing.Size(222, 20);
             this.txtMatch3.TabIndex = 16;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(0, 0);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(80, 17);
+            this.checkBox1.TabIndex = 18;
+            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // chkCleanSE
+            // 
+            this.chkCleanSE.AutoSize = true;
+            this.chkCleanSE.Checked = true;
+            this.chkCleanSE.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkCleanSE.Location = new System.Drawing.Point(15, 396);
+            this.chkCleanSE.Name = "chkCleanSE";
+            this.chkCleanSE.Size = new System.Drawing.Size(94, 17);
+            this.chkCleanSE.TabIndex = 19;
+            this.chkCleanSE.Text = "Clean _S--E--_";
+            this.chkCleanSE.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 451);
+            this.Controls.Add(this.chkCleanSE);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.txtReplace3);
             this.Controls.Add(this.txtMatch3);
             this.Controls.Add(this.txtReplace2);
@@ -297,7 +323,7 @@
             this.Controls.Add(this.label1);
             this.MinimumSize = new System.Drawing.Size(816, 490);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Rename Series";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -329,6 +355,8 @@
         private System.Windows.Forms.TextBox txtMatch2;
         private System.Windows.Forms.TextBox txtReplace3;
         private System.Windows.Forms.TextBox txtMatch3;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chkCleanSE;
     }
 }
 

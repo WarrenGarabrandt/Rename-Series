@@ -152,11 +152,13 @@ namespace Rename_Series
                 Clear();
             }
             Clear();
-            Updating = true;
-            LoadFiles();
-            PopulateExts();
-
-            Updating = false;
+            if (System.IO.Directory.Exists(txtPath.Text))
+            {
+                Updating = true;
+                LoadFiles();
+                PopulateExts();
+                Updating = false;
+            }
         }
 
         private void lstTypes_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -181,6 +183,10 @@ namespace Rename_Series
                 if (file.Enabled)
                 {
                     String name = file.OriginalName;
+                    if (chkCleanSE.Checked)
+                    {
+                        name = CleanSeasonEpisode(name);
+                    }
                     if (txtMatch1.Text.Length > 0)
                     {
                         name = name.Replace(txtMatch1.Text, txtReplace1.Text);
@@ -197,6 +203,102 @@ namespace Rename_Series
                     lstPreview.Items.Add(file.RenamedName);
                 }
             }
+        }
+
+        private string CleanSeasonEpisode(string str)
+        {
+            // look for a leading _
+            int Lead_;
+            int Tail_;
+            int pos = 0;
+            string newStr;
+            while (pos  < str.Length - 4)
+            {
+                Lead_ = -1;
+                Tail_ = -1;
+                newStr = "";
+                //look for this to start with an _
+                if (str[pos] == '_')
+                {
+                    Lead_ = pos;
+                    newStr = " - ";
+                    pos++;
+                    // Is it a S season mark? 
+                    if (str[pos] == 'S' || str[pos] == 's')
+                    {
+                        newStr += "S";
+                        pos++;
+                        // maybe a false start. Look for a number to know we are on the right track.
+                        if (str[pos] >= '0' && str[pos] <= '9')
+                        {
+                            newStr += str[pos];
+                            pos++;
+                            // allow 1, 2, 3, or 4 digit numbers
+                            if (str[pos] >= '0' && str[pos] <= '9')
+                            {
+                                newStr += str[pos];
+                                pos++;
+                            }
+                            if (str[pos] >= '0' && str[pos] <= '9')
+                            {
+                                newStr += str[pos];
+                                pos++;
+                            }
+                            if (str[pos] >= '0' && str[pos] <= '9')
+                            {
+                                newStr += str[pos];
+                                pos++;
+                            }
+                            // now look for the E episode marker
+                            if (str[pos] == 'E' || str[pos] == 'e')
+                            {
+                                newStr += "e";
+                                pos++;
+                                // need an episode number now
+                                if (str[pos] >= '0' && str[pos] <= '9')
+                                {
+                                    newStr += str[pos];
+                                    pos++;
+                                    // allow 1, 2, 3, or 4 digit numbers
+                                    if (str[pos] >= '0' && str[pos] <= '9')
+                                    {
+                                        newStr += str[pos];
+                                        pos++;
+                                    }
+                                    if (str[pos] >= '0' && str[pos] <= '9')
+                                    {
+                                        newStr += str[pos];
+                                        pos++;
+                                    }
+                                    if (str[pos] >= '0' && str[pos] <= '9')
+                                    {
+                                        newStr += str[pos];
+                                        pos++;
+                                    }
+                                    // now look for an optional _ at the end. If we don't have a tailing _, then we may end up cutting off the episode number if it's longer than 4 digits. 
+                                    if (str[pos] == '_')
+                                    {
+                                        Tail_ = pos + 1;
+                                    }
+                                    else
+                                    {
+                                        Tail_ = pos ;
+                                    }
+                                    newStr += " - ";
+                                    string newName = str.Substring(0, Lead_);
+                                    newName += newStr;
+                                    newName += str.Substring(Tail_);
+                                    return newName;
+                                }
+                            }
+                        }
+                    }
+                }
+                // if we made it to this point, something didn't match and we need to advance once character and try again.
+                pos++;
+            }
+            // ran out of characters for seaspon and episode parsing. return unmodified string.
+            return str;
         }
 
         private void button1_Click(object sender, EventArgs e)
