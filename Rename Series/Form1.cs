@@ -183,9 +183,13 @@ namespace Rename_Series
                 if (file.Enabled)
                 {
                     String name = file.OriginalName;
-                    if (chkCleanSE.Checked)
+                    if (chkCleanSE_.Checked)
                     {
-                        name = CleanSeasonEpisode(name);
+                        name = CleanSeasonEpisodeUnderscore(name);
+                    }
+                    if (chkCleanSEdot.Checked)
+                    {
+                        name = CleanSeasonEpisodeDot(name);
                     }
                     if (txtMatch1.Text.Length > 0)
                     {
@@ -199,13 +203,17 @@ namespace Rename_Series
                     {
                         name = name.Replace(txtMatch3.Text, txtReplace3.Text);
                     }
+                    if (chkReplaceDots.Checked)
+                    {
+                        name = name.Replace('.', ' ');
+                    }
                     file.RenamedName = name;
                     lstPreview.Items.Add(file.RenamedName);
                 }
             }
         }
 
-        private string CleanSeasonEpisode(string str)
+        private string CleanSeasonEpisodeUnderscore(string str)
         {
             // look for a leading _
             int Lead_;
@@ -301,6 +309,103 @@ namespace Rename_Series
             return str;
         }
 
+        private string CleanSeasonEpisodeDot(string str)
+        {
+            // look for a leading _
+            int Lead_;
+            int Tail_;
+            int pos = 0;
+            string newStr;
+            while (pos < str.Length - 4)
+            {
+                Lead_ = -1;
+                Tail_ = -1;
+                newStr = "";
+                //look for this to start with an .
+                if (str[pos] == '.')
+                {
+                    Lead_ = pos;
+                    newStr = " - ";
+                    pos++;
+                    // Is it a S season mark? 
+                    if (str[pos] == 'S' || str[pos] == 's')
+                    {
+                        newStr += "S";
+                        pos++;
+                        // maybe a false start. Look for a number to know we are on the right track.
+                        if (str[pos] >= '0' && str[pos] <= '9')
+                        {
+                            newStr += str[pos];
+                            pos++;
+                            // allow 1, 2, 3, or 4 digit numbers
+                            if (str[pos] >= '0' && str[pos] <= '9')
+                            {
+                                newStr += str[pos];
+                                pos++;
+                            }
+                            if (str[pos] >= '0' && str[pos] <= '9')
+                            {
+                                newStr += str[pos];
+                                pos++;
+                            }
+                            if (str[pos] >= '0' && str[pos] <= '9')
+                            {
+                                newStr += str[pos];
+                                pos++;
+                            }
+                            // now look for the E episode marker
+                            if (str[pos] == 'E' || str[pos] == 'e')
+                            {
+                                newStr += "e";
+                                pos++;
+                                // need an episode number now
+                                if (str[pos] >= '0' && str[pos] <= '9')
+                                {
+                                    newStr += str[pos];
+                                    pos++;
+                                    // allow 1, 2, 3, or 4 digit numbers
+                                    if (str[pos] >= '0' && str[pos] <= '9')
+                                    {
+                                        newStr += str[pos];
+                                        pos++;
+                                    }
+                                    if (str[pos] >= '0' && str[pos] <= '9')
+                                    {
+                                        newStr += str[pos];
+                                        pos++;
+                                    }
+                                    if (str[pos] >= '0' && str[pos] <= '9')
+                                    {
+                                        newStr += str[pos];
+                                        pos++;
+                                    }
+                                    // now look for an optional . at the end. If we don't have a tailing ., then we may end up cutting off the episode number if it's longer than 4 digits. 
+                                    if (str[pos] == '.')
+                                    {
+                                        Tail_ = pos + 1;
+                                    }
+                                    else
+                                    {
+                                        Tail_ = pos;
+                                    }
+                                    newStr += " - ";
+                                    string newName = str.Substring(0, Lead_);
+                                    newName += newStr;
+                                    newName += str.Substring(Tail_);
+                                    return newName;
+                                }
+                            }
+                        }
+                    }
+                }
+                // if we made it to this point, something didn't match and we need to advance once character and try again.
+                pos++;
+            }
+            // ran out of characters for seaspon and episode parsing. return unmodified string.
+            return str;
+        }
+
+
         private void button1_Click(object sender, EventArgs e)
         {
             cmdUndo.Enabled = true;
@@ -385,6 +490,11 @@ namespace Rename_Series
                     //System.Diagnostics.Debug.WriteLine(string.Format("Renaming \"{0}\" to \"{1}\".", source, destination));
                 }
             }
+        }
+
+        private void chkCleanSE_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

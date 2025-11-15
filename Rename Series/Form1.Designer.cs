@@ -50,8 +50,9 @@
             this.txtMatch2 = new System.Windows.Forms.TextBox();
             this.txtReplace3 = new System.Windows.Forms.TextBox();
             this.txtMatch3 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.chkCleanSE = new System.Windows.Forms.CheckBox();
+            this.chkCleanSE_ = new System.Windows.Forms.CheckBox();
+            this.chkCleanSEdot = new System.Windows.Forms.CheckBox();
+            this.chkReplaceDots = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -203,7 +204,7 @@
             // cmdPreview
             // 
             this.cmdPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cmdPreview.Location = new System.Drawing.Point(631, 310);
+            this.cmdPreview.Location = new System.Drawing.Point(626, 377);
             this.cmdPreview.Name = "cmdPreview";
             this.cmdPreview.Size = new System.Drawing.Size(75, 23);
             this.cmdPreview.TabIndex = 10;
@@ -274,35 +275,54 @@
             this.txtMatch3.Size = new System.Drawing.Size(222, 20);
             this.txtMatch3.TabIndex = 16;
             // 
-            // checkBox1
+            // chkCleanSE_
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(0, 0);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(80, 17);
-            this.checkBox1.TabIndex = 18;
-            this.checkBox1.Text = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkCleanSE_.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkCleanSE_.AutoSize = true;
+            this.chkCleanSE_.Checked = true;
+            this.chkCleanSE_.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkCleanSE_.Location = new System.Drawing.Point(15, 396);
+            this.chkCleanSE_.Name = "chkCleanSE_";
+            this.chkCleanSE_.Size = new System.Drawing.Size(94, 17);
+            this.chkCleanSE_.TabIndex = 19;
+            this.chkCleanSE_.Text = "Clean _S--E--_";
+            this.chkCleanSE_.UseVisualStyleBackColor = true;
+            this.chkCleanSE_.CheckedChanged += new System.EventHandler(this.chkCleanSE_CheckedChanged);
             // 
-            // chkCleanSE
+            // chkCleanSEdot
             // 
-            this.chkCleanSE.AutoSize = true;
-            this.chkCleanSE.Checked = true;
-            this.chkCleanSE.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkCleanSE.Location = new System.Drawing.Point(15, 396);
-            this.chkCleanSE.Name = "chkCleanSE";
-            this.chkCleanSE.Size = new System.Drawing.Size(94, 17);
-            this.chkCleanSE.TabIndex = 19;
-            this.chkCleanSE.Text = "Clean _S--E--_";
-            this.chkCleanSE.UseVisualStyleBackColor = true;
+            this.chkCleanSEdot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkCleanSEdot.AutoSize = true;
+            this.chkCleanSEdot.Checked = true;
+            this.chkCleanSEdot.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkCleanSEdot.Location = new System.Drawing.Point(15, 419);
+            this.chkCleanSEdot.Name = "chkCleanSEdot";
+            this.chkCleanSEdot.Size = new System.Drawing.Size(88, 17);
+            this.chkCleanSEdot.TabIndex = 20;
+            this.chkCleanSEdot.Text = "Clean .S--E--.";
+            this.chkCleanSEdot.UseVisualStyleBackColor = true;
+            // 
+            // chkReplaceDots
+            // 
+            this.chkReplaceDots.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkReplaceDots.AutoSize = true;
+            this.chkReplaceDots.Checked = true;
+            this.chkReplaceDots.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkReplaceDots.Location = new System.Drawing.Point(631, 314);
+            this.chkReplaceDots.Name = "chkReplaceDots";
+            this.chkReplaceDots.Size = new System.Drawing.Size(126, 17);
+            this.chkReplaceDots.TabIndex = 21;
+            this.chkReplaceDots.Text = "Replace . with space";
+            this.chkReplaceDots.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 451);
-            this.Controls.Add(this.chkCleanSE);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.chkReplaceDots);
+            this.Controls.Add(this.chkCleanSEdot);
+            this.Controls.Add(this.chkCleanSE_);
             this.Controls.Add(this.txtReplace3);
             this.Controls.Add(this.txtMatch3);
             this.Controls.Add(this.txtReplace2);
@@ -355,8 +375,9 @@
         private System.Windows.Forms.TextBox txtMatch2;
         private System.Windows.Forms.TextBox txtReplace3;
         private System.Windows.Forms.TextBox txtMatch3;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox chkCleanSE;
+        private System.Windows.Forms.CheckBox chkCleanSE_;
+        private System.Windows.Forms.CheckBox chkCleanSEdot;
+        private System.Windows.Forms.CheckBox chkReplaceDots;
     }
 }
 
